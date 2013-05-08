@@ -73,6 +73,18 @@ class Requests_Transport_cURL implements Requests_Transport {
 	}
 
 	/**
+	 * Drop previous request vars
+	 */
+	public function cleanUp() {
+		$this->headers = '';
+		$this->info = null;
+		$this->done_headers = false;
+		$this->stream_handle = null;
+
+		$this->__construct();
+	}
+
+	/**
 	 * Perform a request
 	 *
 	 * @throws Requests_Exception On a cURL error (`curlerror`)

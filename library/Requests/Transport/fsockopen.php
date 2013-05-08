@@ -27,6 +27,14 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 	 */
 	public $info;
 
+    /**
+     * Drop previous request vars
+     */
+    public function cleanUp() {
+        $this->headers = '';
+        $this->info = null;
+    }
+
 	/**
 	 * Perform a request
 	 *

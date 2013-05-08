@@ -102,6 +102,13 @@ class MockTransport implements Requests_Transport {
 	public static function test() {
 		return true;
 	}
+
+	public function cleanUp() {
+		$this->chunked = false;
+		$this->body = 'Test Body';
+		$this->code = 200;
+		$this->raw_headers = '';
+	}
 }
 
 class RawTransport implements Requests_Transport {
@@ -120,5 +127,9 @@ class RawTransport implements Requests_Transport {
 	}
 	public static function test() {
 		return true;
+	}
+
+	public function cleanUp() {
+		// TODO: Implement cleanUp() method.
 	}
 }

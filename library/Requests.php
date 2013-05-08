@@ -81,7 +81,7 @@ class Requests {
 	 *
 	 * Use {@see get_transport()} instead
 	 *
-	 * @var string|null
+	 * @var Requests_Transport|null
 	 */
 	public static $transport = null;
 
@@ -151,7 +151,8 @@ class Requests {
 		// Caching code, don't bother testing coverage
 		// @codeCoverageIgnoreStart
 		if (self::$transport !== null) {
-			return new self::$transport();
+			self::$transport->cleanUp();
+			return self::$transport;
 		}
 		// @codeCoverageIgnoreEnd
 
@@ -169,7 +170,7 @@ class Requests {
 
 			$result = call_user_func(array($class, 'test'));
 			if ($result) {
-				self::$transport = $class;
+				self::$transport = new $class();
 				break;
 			}
 		}
@@ -177,7 +178,7 @@ class Requests {
 			throw new Requests_Exception('No working transports found', 'notransport', self::$transports);
 		}
 
-		return new self::$transport();
+		return self::$transport;
 	}
 
 	/**#@+

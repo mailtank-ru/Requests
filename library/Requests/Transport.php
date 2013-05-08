@@ -34,6 +34,12 @@ interface Requests_Transport {
 	public function request_multiple($requests, $options);
 
 	/**
+	 * Since Transport is as singleton, properties cleanup is necessary to perform new request
+	 * see {@see Requests::get_transport()} for details
+	 */
+	public function cleanUp();
+
+	/**
 	 * Self-test whether the transport can be used
 	 * @return bool
 	 */
